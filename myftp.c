@@ -36,6 +36,7 @@ int recvn(int sd, void *buf, int buf_len){
 }
 
 void *threadFun(void *arg){
+    unsigned char buff[MAXLEN];
     struct _threadParam threadParam;
     memcpy(&threadParam, (struct _threadParam *)arg, sizeof(threadParam));
     int client_sd = threadParam.client_sd;
@@ -199,5 +200,6 @@ void *threadFun(void *arg){
     }
     close(client_sd);
     int threadIdx = threadParam.threadClientIdx;
+    fflush(stdout);
     threadClient[threadIdx].available = 1;
 }

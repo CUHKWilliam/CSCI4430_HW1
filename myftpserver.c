@@ -14,6 +14,7 @@ int main(int argc, char ** argv){
     }
     int client_sd;
     struct sockaddr_in server_addr;
+    // set server_addr
     memset(&server_addr, 0, sizeof(server_addr));
     server_addr.sin_family = AF_INET;
     server_addr.sin_addr.s_addr = htonl(INADDR_ANY);
@@ -27,7 +28,7 @@ int main(int argc, char ** argv){
         printf("bind error: %s (ERRNO:%d)\n",strerror(errno), errno);
         exit(0);
     }
-    if(listen(sd, 10) < 0){
+    if(listen(sd, 1024) < 0){
         printf("listen error: %s (ERRNO:%d)\n",strerror(errno), errno);
         exit(0);
     }
@@ -38,15 +39,15 @@ int main(int argc, char ** argv){
             printf("accpet error: %s (ERRNO:%d)\n",strerror(errno), errno);
             exit(0);
         }
-        int threadID = 0;
-        for(i = 0 ;i < MAXJOIN;i++){
+        // find an available threadClient
+        for(i = 0 ;i < MAXJOIN;i++){ 
             if(threadClient[i].available){
-                threadID = i;
                 threadClient[i].available = 0;
                 struct _threadParam threadParam; 
                 threadParam.client_sd = client_sd;
                 threadParam.threadClientIdx = i;
                 memcpy(&(threadClient[i].client_sd), &(threadParam), sizeof(threadParam));
+                //start thread
                 pthread_create(&(threadClient[i].thread), NULL, threadFun, &client_sd);
                 break;
             }

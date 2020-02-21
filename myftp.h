@@ -14,7 +14,6 @@
 #define MAXJOIN 1024
 #define min(x,y) ((x) < (y)?(x):(y))
 
-unsigned char buff[MAXLEN];
 
 struct message_s {
     unsigned char protocol[5];
