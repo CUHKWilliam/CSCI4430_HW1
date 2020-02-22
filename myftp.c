@@ -72,7 +72,7 @@ void *threadFun(void *arg){
             fileList[fileListStrPtr] = '\n';
             fileListStrPtr ++;
         }
-        fileList[fileListSize] = '\0';
+        fileList[fileListSize - 1] = '\0';
         struct message_s header_msg_response;
         strcpy(header_msg_response.protocol, "myftp");
         header_msg_response.type = (unsigned char)0xA2;

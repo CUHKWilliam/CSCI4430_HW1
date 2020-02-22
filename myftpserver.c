@@ -50,6 +50,7 @@ int main(int argc, char ** argv){
                 printf("start idx:%d\n", i);
                 //start thread
                 pthread_create(&(threadClient[i].thread), NULL, threadFun, &(threadClient[i].threadParam));
+                pthread_detach(threadClient[i].thread);
                 break;
             }
         }
