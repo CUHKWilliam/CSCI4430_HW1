@@ -27,7 +27,7 @@ struct _threadParam{
 };
 
 struct _threadClient{
-    int client_sd;
+    struct _threadParam threadParam;
     int available;
     pthread_t thread;
 };
