@@ -46,9 +46,10 @@ int main(int argc, char ** argv){
                 struct _threadParam threadParam; 
                 threadParam.client_sd = client_sd;
                 threadParam.threadClientIdx = i;
-                memcpy(&(threadClient[i].client_sd), &(threadParam), sizeof(threadParam));
+                memcpy(&(threadClient[i].threadParam), &(threadParam), sizeof(threadParam));
+                printf("start idx:%d\n", i);
                 //start thread
-                pthread_create(&(threadClient[i].thread), NULL, threadFun, &client_sd);
+                pthread_create(&(threadClient[i].thread), NULL, threadFun, &(threadClient[i].threadParam));
                 break;
             }
         }
