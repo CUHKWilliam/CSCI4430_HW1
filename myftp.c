@@ -201,7 +201,7 @@ void *threadFun(void *arg){
     }
     close(client_sd);
     int threadIdx = threadParam.threadClientIdx;
-    printf("finish idx:%d\n", threadIdx);
+    //printf("finish idx:%d\n", threadIdx);
     fflush(stdout);
     threadClient[threadIdx].available = 1;
 }
